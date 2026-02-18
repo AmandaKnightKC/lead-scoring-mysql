@@ -1,0 +1,4 @@
+DB_USER=cms_analyst
+DB_PASSWORD=kabla5392!up
+DB_NAME=cms_data
+DB_HOST=127.0.0.1

@@ -1,8 +1,4 @@
-DROP TABLE IF EXISTS applications;
-DROP TABLE IF EXISTS quotes;
-DROP TABLE IF EXISTS marketing_leads;
-DROP TABLE IF EXISTS agent_quota;
-DROP TABLE IF EXISTS agent_data;
+
 
 CREATE TABLE agent_data (
     agent_id INT PRIMARY KEY,
