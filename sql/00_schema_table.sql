@@ -1,5 +1,3 @@
-
-
 CREATE TABLE agent_data (
     agent_id INT PRIMARY KEY,
     agent_name VARCHAR(100),
@@ -31,7 +29,6 @@ CREATE TABLE quotes (
     lead_id INT,
     FOREIGN KEY (lead_id) REFERENCES marketing_leads(lead_id)
 );
-
 CREATE TABLE applications (
     application_id INT PRIMARY KEY AUTO_INCREMENT,
     agent_id INT,
