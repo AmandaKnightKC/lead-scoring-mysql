@@ -13,7 +13,7 @@ user = os.getenv("MYSQL_USER")
 password = os.getenv("MYSQL_PASSWORD")
 database = os.getenv("MYSQL_DB")
 
-# MySQL table column expectations
+# MySQL table column expectations, schema
 expected_columns = {
     "agent_data": [
         "agent_id", "agent_name", "agent_ramp", "start_date", "term_date", "login_email"
@@ -49,12 +49,12 @@ df_leads = None
 
 for sheet_name, df in sheets.items():
     print(f"\nUploading sheet: {sheet_name}")
-    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
+    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_") # Normalize column names
     print(f"Columns in `{sheet_name}` after cleaning: {list(df.columns)}")
-    df = df.loc[:, ~df.columns.str.contains("^unnamed", case=False, na=False)]
-    expected = expected_columns[sheet_name]
+    df = df.loc[:, ~df.columns.str.contains("^unnamed", case=False, na=False)] #drop unnamed columns
+    expected = expected_columns[sheet_name] #align dataframes to expected schema (extra columns will be ignored, missing columns will be filled with nulls)
     df = df[[col for col in expected if col in df.columns]]
-    df = df.where(pd.notnull(df), None)
+    df = df.where(pd.notnull(df), None) # Replace NaN with None for MySQL compatibility
 
     # Save marketing_leads for filtering other tables later
     if sheet_name == "marketing_leads":
